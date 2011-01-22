@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>EmmaDynamicIHM</title>
+		
+		<!-- import intern lib css -->
+		 <style type="text/css" media="screen">@import "./lib/jqtouch/jqtouch.css";</style>
+        
+        <!-- import intern IHM css -->
+        <style type="text/css" media="screen">@import "./lib/jqtouch/themes/emma/theme.css";</style>
+        <style type="text/css" media="screen">@import "./resource/css/sink.css";</style>
+		
+		<!-- import intern lib -->
+		<script src="./lib/json/json.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./lib/jquery/jquery.1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./lib/jqtouch/jqtouch.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./lib/jqtouch/ext/scroll/jqt.scroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./lib/IoC/IoC.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./lib/crossdomain_php_proxy/crossdomain_php_proxy.js" type="text/javascript" charset="utf-8"></script>
+		<!-- import distant websocket io script
+			don't work with i.E ... fu ie
+			<script src="http://slash.emma-earth.org:8080/socket.io.js"></script>
+		 -->
+		
+
+		
+		<!-- import intern IHM script -->
+		<script src="./src/view/UIComponent/uicomponent.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/view/UIComponent/uicomponent_list.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/view/UIComponent/uicomponent_view.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/view/UIComponent/uicomponent_card.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="./src/view/UIComponent/uicomponent_link.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/view/UIComponent/uicomponent_button.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/view/UIComponent/uicomponent_toolbar.js" type="text/javascript" charset="utf-8"></script>
+		
+		
+		<script src="./src/view/sink.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/model/emma_model.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="./src/controler/sink/sink_controler.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="./src/controler/sink/emma/emma_helper.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/sink/emma/emma_parser.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/sink/emma/node_controler.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/sink/emma/log_controler.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/sink/emma/data_controler.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="./src/controler/comm/comm_controler.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/comm/ajax/comm_CrossDomainAjax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/comm/websocket/comm_Websocket.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="./src/controler/renderer/renderer_controler.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/renderer/jquery/renderer_jquery.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="./src/controler/widget/widget_controler.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/widget/widget/view/view.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="./src/view/sink_event.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/view/sink_init.js" type="text/javascript" charset="utf-8"></script>
+		
+		
+		
+		
+		
+   		
+   		<!-- start application -->
+   		<script type="text/javascript">
+   			/*
+   			var controler = new Emma.WebsocketControler({
+				uri : "slash.emma-earth.com",
+				port: 8080,
+			});
+			$.ready = function(){
+				controler.init();		
+				
+			};
+			*/
+			/*
+			
+			var controler = new Emma.AjaxControler({
+				uri : "localhost",
+				port:8080,
+			});
+			$.ready = function(){
+				controler.init();			
+			};
+			*/
+			
+			
+			$.ready = function(){
+				Sink.init({
+					"root" : new Sink.component({
+						"id":"home",
+						"name":"Home",
+						"renderView":Sink.widget.provider.get("view").render,
+						//"renderCard":function(){alert("renderCard");},
+						//"renderLink":function(){alert("renderLink");},
+					}),
+					"renderer":"jquery",
+					"controler":"node",
+					"comm":"CrossDomainAjax",
+					
+					"url":"localhost",
+					"port":8080,
+				});
+
+			};
+   		</script>
+		
+		<!-- meta mobile screen adaptation -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+	</head>
+	<body>
+		
+	</body>
+	
+	
+	
+</html>

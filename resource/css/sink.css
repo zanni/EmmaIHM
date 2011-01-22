@@ -1,0 +1,100 @@
+body{
+	background: white;
+	height: 100%;
+	width:100%;
+	
+}
+
+
+
+div.card{
+overflow-x: hidden;
+	height: inherit;
+	text-align: center;
+	border-left: solid #2D3642 1px;
+	z-index: 1;
+}
+
+.navigation_button{
+	display: none;
+}
+
+.navigation_button.visible{
+	display: block;
+}
+
+/* UI Link*/
+
+li a img{
+	height: 32px;
+	width: 32px;
+	position: relative;
+	float: left;
+}
+
+li a span{
+	position: relative;
+	float: left;
+	margin-left:15px;
+	margin-top: 6px;
+	
+}
+
+/*
+*
+*Screen Device CSS -> width > limit
+*
+*/
+body.screen .navigation{
+	width: 25%;	
+	float:left;
+	height: inherit;
+}
+
+
+
+body.screen .card{
+	position: relative;
+	float:right;
+	display: none;
+	width: 75%;
+}
+
+body.screen .card.visible{
+	display: block;
+}
+
+
+/*
+*
+*Mobile Device CSS -> width > limit
+*
+*/
+body.mobile .navigation{
+	display: none;
+	z-index: 0;
+	
+}
+
+body.mobile .navigation .toolbar{
+}
+
+body.mobile .navigation.visible.current{
+	display: block;	
+	z-index: 2;
+}
+
+body.mobile .card{
+	display: none;
+}
+
+body.mobile .card.visible{
+	width: 100%;
+	z-index:1;
+	display: block;
+}
+
+
+
+
+
