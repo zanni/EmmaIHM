@@ -8,18 +8,24 @@ body{
 
 
 div.card{
-overflow-x: hidden;
+	overflow-x: hidden;
 	height: inherit;
 	text-align: center;
 	border-left: solid #2D3642 1px;
 	z-index: 1;
 }
+div.view{
+	display : none;
+}
+div.view.visible{
+	display : block;
+}
 
-.navigation_button{
+.view_button{
 	display: none;
 }
 
-.navigation_button.visible{
+.view_button.visible{
 	display: block;
 }
 
@@ -45,7 +51,7 @@ li a span{
 *Screen Device CSS -> width > limit
 *
 */
-body.screen .navigation{
+body.screen .view{
 	width: 25%;	
 	float:left;
 	height: inherit;
@@ -54,6 +60,7 @@ body.screen .navigation{
 
 
 body.screen .card{
+	
 	position: relative;
 	float:right;
 	display: none;
@@ -70,16 +77,16 @@ body.screen .card.visible{
 *Mobile Device CSS -> width > limit
 *
 */
-body.mobile .navigation{
+body.mobile .view{
 	display: none;
 	z-index: 0;
 	
 }
 
-body.mobile .navigation .toolbar{
+body.mobile .view .toolbar{
 }
 
-body.mobile .navigation.visible.current{
+body.mobile .view.visible{
 	display: block;	
 	z-index: 2;
 }

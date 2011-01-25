@@ -4,8 +4,9 @@ Sink.comm.uri = "src/controler/comm/";
 
 
 Sink.comm.parseMessage = function(json){
-	if(json.message){
-		return JSON.parse(json.message[1]);
+	var model = JSON.parse(json);
+	if(model.message){
+		return model.message[1];
 	}
 };
 

@@ -1,19 +1,37 @@
 Sink.initCoreEvents = function(){
-
-	$('.navigation li.composite a').tap(function(){
-		
-			var component = sink.find($(this).attr("id").replace("link-",""));
+	$('.view li a').tap(function(){
 			
-			sink.currentNavigation = component;
-	    	if(component.card){
-				component.displayCard();
-			} 
-	    	component.loadComponent();
-	    			
+			var component = Sink.find($(this).attr("id").replace("link-",""));
+			
+			Sink.currentView = component;
+			/*
+			if(component.children && component.children.length > 0){
+				
+				for(var i in component.children){
+					child = component.chilren[i];
+					if(child.card || child.renderCard){
+						child.render("card");
+					}
+					if(child.load){
+						child.load();
+					}
+				}
+			}
+			*/
+			if(component.renderCard)component.renderCard();
+			
+			if(component.card || component.renderCard){
+				component.display("card");
+			}
+			
+			
+	    	
+	    	
+	    	
 			
 	});
-	
-	$('.navigation li.leaf a').tap(function(){
+	/*
+	$('.view li.leaf a').tap(function(){
 	    	var component = sink.find($(this).attr("id").replace("link-",""));
 	    	if(component.card) {
 				
@@ -27,15 +45,15 @@ Sink.initCoreEvents = function(){
 			}		
 			
 	});
-	
-	
+	*/
+	/*
 	 $(".back").tap(function(){
 		sink.currentNavigation.unrenderChild();
 		var component = sink.find($(this).attr("id").replace("link-",""));
 		sink.currentNavigation = component;
 	});
 	
-	$(".navigation_button").tap(function(){
+	$(".view_button").tap(function(){
 	
 		if(sink.navigationVisible){
 			sink.navigationVisible = false;
@@ -50,7 +68,7 @@ Sink.initCoreEvents = function(){
 		}
 		
 	});
-	
+	*/
 	
 
 };

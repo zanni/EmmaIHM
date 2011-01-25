@@ -7,30 +7,33 @@
 *			name:"name",
 *			style:"style",
 *			cls : "cls",
-*			callback:function(){}
 *		}
 *
 */
-UIComponent.card = function(){
+UIComponent.button = function(spec){
 
 	var that = UIComponent.component();
 	
-	that.render = function(spec){
+	that.href = spec.href;
+	that.name = spec.name;
+	that.style = spec.style;
+	that.cls = spec.cls;
+	
+	that.render = function(){
 		var href = "";
 		var cls= "";
-		var balise = "a";
 		var id = "";
 	
 		
-		if(spec.href) {
-			href = "href='#"+spec.href+"'";
-			id = "id='link-"+spec.href+"'";
+		if(that.href) {
+			href = "href='#"+that.href+"'";
+			id = "id='link-"+that.href+"'";
 		}
-		if(spec.style || spec.cls) cls= "class='"+spec.style +" "+spec.cls+"'";
+		if(that.style || that.cls) cls= "class='"+that.style +" "+that.cls+"'";
 		
 		
 		
-		return "<"+balise+" "+id+" "+href+" "+cls+">"+spec.name+"</"+balise+">";
+		return "<a "+id+" "+href+" "+cls+">"+that.name+"</a>";
 	};
 	
 	return that;

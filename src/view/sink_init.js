@@ -10,9 +10,8 @@ var jQT = new $.jQTouch({
                 statusBar: 'black',
                 fullscreen: true, 
                 fixedViewport:true,
-                backSelector: '.back, .goback',
-                initializeTouch: 'li.composite a, li.leaf p, .touch',
-                slideSelector: 'li.composite a, .touch',
+            	slideSelector: "body > * > ul li:not(.leaf) a",
+            	touchSelector: "body > * > ul li:not(.leaf) a",
                 
 });
 
@@ -55,33 +54,56 @@ Sink.init = function(spec){
 	Sink.viewcls = spec.viewcls || "view";
 	Sink.cardcls = spec.cardcls || "card";
 	
+	Sink.body = spec.body || "body";
+	
+	Sink.mobilecls = spec.mobilecls || "mobile";
+	Sink.tablettecls = spec.tablettecls || "tablette";
+	Sink.screencls = spec.screencls || "screen";
+	
 	Sink.root = spec.root;
 	
-	try{
+	//try{
 		
-		Sink.widget.provider.get("view").init();
-		//Sink.comm.selected = Sink.comm.provider.get(spec.comm);
+		Sink.comm.selected = Sink.comm.provider.get(spec.comm.name);
 		Sink.renderer.selected = Sink.renderer.provider.get(spec.renderer);
 		
 		
-		//var controler = Sink.controler.provider.get(spec.controler);	
-		//controler.init();
+		var controler = Sink.controler.provider.get(spec.controler);	
+		controler.init(spec.comm);
 		
-		//Sink.root.render("card");
 		//need child loaded i.e controler init
 		Sink.root.render("view");
-		//Sink.root.display("view");
-		//Sink.root.display("card");
+		Sink.root.render("card");
 		
-		//Sink.currentView = Sink.root;
+		Sink.root.display("card");
+		Sink.root.display("view");
 		
 		
-			
+		Sink.currentView = Sink.root;
+		
+		
+		/*	
 		
 	}catch(err){
 		console.log(err);
+	}*/
+	
+	if(Sink.isScreen()){
+		Sink.renderer.selected.addClass(Sink.body, Sink.screencls);
+	}
+	else if(Sink.isTablette()){
+		Sink.renderer.selected.addClass(Sink.body, Sink.tablettecls);
+	}
+	else if(Sink.isMobile()){
+		Sink.renderer.selected.addClass(Sink.body, Sink.mobilecls);
 	}
 	
+	var xMax = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	var yMax = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	
+	$('body').css({"height":yMax,"width":xMax});
+
+	
+	Sink.initCoreEvents();
 	
 };

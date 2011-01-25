@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>EmmaDynamicIHM</title>
+		<title>EmmaIHM</title>
 		
 		<!-- import intern lib css -->
 		 <style type="text/css" media="screen">@import "./lib/jqtouch/jqtouch.css";</style>
@@ -56,6 +56,8 @@
 		
 		<script src="./src/controler/widget/widget_controler.js" type="text/javascript" charset="utf-8"></script>
 		<script src="./src/controler/widget/widget/view/view.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/widget/widget/card/card.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./src/controler/widget/widget/home_card/home_card.js" type="text/javascript" charset="utf-8"></script>
 		
 		<script src="./src/view/sink_event.js" type="text/javascript" charset="utf-8"></script>
 		<script src="./src/view/sink_init.js" type="text/javascript" charset="utf-8"></script>
@@ -95,17 +97,19 @@
 						"id":"home",
 						"name":"Home",
 						"renderView":Sink.widget.provider.get("view").render,
-						//"renderCard":function(){alert("renderCard");},
+					
+						"renderCard":Sink.widget.provider.get("home_card").render,
 						//"renderLink":function(){alert("renderLink");},
 					}),
 					"renderer":"jquery",
 					"controler":"node",
-					"comm":"CrossDomainAjax",
-					
-					"url":"localhost",
-					"port":8080,
+					"comm":{
+						"name": "CrossDomainAjax",
+						"url": "localhost",
+						"port" : 8080
+					},
+			
 				});
-
 			};
    		</script>
 		

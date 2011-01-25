@@ -5,11 +5,21 @@ var jqueryRenderer = function(){
 		$(selector).append(html);
 	};
 	
-	that.removeHTML = function(selector){};
+	that.removeHTML = function(selector){
+		$(selector).remove();
+	};
 	
-	that.addClass = function(selector,cls){};
+	that.addClass = function(selector,cls){
+		$(selector).addClass(cls);
+	};
 	
-	that.removeClass = function(selector, cls){};
+	that.removeClass = function(selector, cls){
+		$(selector).removeClass(cls);
+	};
+	
+	that.hasClass = function(selector, cls){
+		return $(selector).hasClass(cls);
+	};
 	
 	return that;
 };

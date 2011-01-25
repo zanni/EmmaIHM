@@ -8,15 +8,21 @@
 *		}
 *
 */
-UIComponent.list = function(){
+UIComponent.list = function(spec){
 
 	var that = UIComponent.component();
 	
-	that.render = function(spec){
+	that.style = spec.style;
+	that.items = spec.items;
+	
+	that.render = function(){
 		var render = "";
-		render += "<ul class='"+spec.style+"'>";
-		for(var i=0;i<spec.items.length;i++){
-			render += spec.items[i];
+		render += "<ul class='"+that.style+"'>";
+		if(that.items){
+			for(var i=0;i<that.items.length;i++){
+				if(that.items[i].render) render += that.items[i].render();
+				else render += that.items[i];
+			}
 		}
 		render += "</ul>";
 		return render;

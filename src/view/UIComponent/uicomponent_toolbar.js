@@ -8,34 +8,34 @@
 *		}
 *
 */
-UIComponent.toolbar = function(){
+UIComponent.toolbar = function(spec){
 
 	var that = UIComponent.component();
 	
-	that.render = function(spec){
+	that.name = spec.name || "";
+	that.items = spec.items;
+	
+	that.render = function(){
 		var render = "";
-		render += "<div class='toolbar'><h1>"+spec.name+"</h1>";
-		//loop on spec.items to add elements to toolbar
+		render += "<div class='toolbar'><h1>"+that.name+"</h1>";
+		//loop on that.items to add elements to toolbar
 		var nav_button = [];
-		var cls = "navigation_button";
-		
-		
+		var cls = "view_button";
 		if(Sink.view_visible){
 			cls += " visible";
 		}
-		
-		
 		render += UIComponent.button({
-					name : "navigation",
+					name : "view",
 					style : "add",
 					cls : cls,
-		});
+		}).render();
 		
 		
 		
-		if(spec.items){
-			for(var i=0; i<spec.items.length;i++){
-				render += spec.items[i];
+		if(that.items){
+			for(var i=0; i<that.items.length;i++){
+				if(that.items[i].render) render += that.items[i].render();
+				else render += that.items[i];
 			}
 		}
 		

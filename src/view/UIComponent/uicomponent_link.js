@@ -5,27 +5,42 @@
 *		{
 *			id:"id",
 *			name:"name",
-*			leaf:true/false,
 *			style:"style",
 *			ico:"path_to_ico",
 *			item:{item},
 *		}
 *
 */
-UIComponent.link = function(){
+UIComponent.link = function(spec){
 
 	var that = UIComponent.component();
-	
-	that.render = function(spec){
+	that.id = spec.id;
+	that.name = spec.name;
+	that.style = spec.style;
+	that.ico = spec.ico;
+	that.items = spec.items;
+	that.leaf = spec.leaf;
+	that.render = function(){
 		var ico = "";
 		var temp = "";
-		for(var i in spec.item) temp+=spec.item[i];
+		if(that.items){
+			for(var i=0;i<that.items.length;i++){
+				if(that.items[i].render) temp += that.items[i].render();
+				else temp += that.items[i];
+			}
+		}
 		
-		if(spec.ico) ico = "src='"+spec.ico+"'";
-		if(spec.leaf) return "<li id='link-"+spec.id+"' class='"+spec.style+" leaf"+"'><a id='link-"+spec.id+"'><img "+ico+"></img><span>"+spec.name+"</span></a>"+temp+"</li>";
+		if(that.ico) ico = "src='"+that.ico+"'";
+		var href = "";
+		var cls = "";
+		if(!that.leaf){
+			 href = " href='#"+that.id+"' ";
+		}
+		else cls = "leaf";
+	
+	var link = "<li class='"+that.style+" "+cls+"'><a id='link-"+that.id+"' "+href+"><img src='"+that.ico+"'></img><span>"+that.name+"</span></a></li>";
 		
-		
-		else return "<li id='link-"+spec.id+"' class='"+spec.style+" composite"+"'><a id='link-"+spec.id+"' href='#"+spec.id+"'><img src='"+spec.ico+"'></img><span>"+spec.name+"</span></a></li>";
+		return link;
 	};
 	
 	return that;

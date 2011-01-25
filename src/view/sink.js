@@ -45,7 +45,7 @@ var TreeComponent = function(spec){
 	
 	that.id = spec.id || null;
 	that.parent = spec.parent || null;
-	that.children = spec.children ||null;
+	that.children = spec.children || [];
 	that.loaded = false;
 	if(that.children) loaded = true;
 		
@@ -117,34 +117,45 @@ Sink.linkcls = null;
 Sink.viewcls = null;
 Sink.cardcls = null;
 
+Sink.body = null;
+Sink.mobilecls = null;
+Sink.tablettecls = null;
+Sink.screencls = null;
+
 Sink.currentCard = null;
 Sink.currentView = null;
 
 Sink.root = null;
 
 Sink.find =function(id){
-	return that.root.find(id);
+	return Sink.root.find(id);
 };
 
 Sink.renderer = null;
 Sink.comm = null;
 
+Sink.isScreen = function(){
+	var xMax = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	var yMax = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	if(xMax >= 600) return true;
+	else return false;
+};
+Sink.isMobile = function(){
+	return !Sink.isScreen()
+};
+Sink.isTablette = function(){
+	////////////////////////////////////////////////
+	//
+	//TODO - find a way to recognize tactil input
+	//
+	////////////////////////////////////////////////
+	return false;
+	
+};
 
-
-////////////////////////////////////////////////
-//
-//TODO - Implement method 
-//
-////////////////////////////////////////////////
-Sink.mobile = false;
-Sink.tablette = false;
-Sink.screen = false;
-Sink.isMobile = function(){return Sink.mobile};
-Sink.isTablette = function(){return Sink.tablette};
-Sink.isScreen = function(){return Sink.screen};
 
 Sink.view_visible = false;
-Sink.isViewVisible = function(){return Sink.view_visible};
+Sink.isViewVisible = function(){return view_visible};
 
 
 
@@ -199,6 +210,7 @@ Sink.component = function(spec){
 	var that = TreeComponent(spec);
 	
 	that.name = spec.name || null;
+	
 	that.style = {};
 	if(spec.style){
 		that.style.link = spec.style.link || "arrow";
@@ -208,10 +220,12 @@ Sink.component = function(spec){
 		that.style.link = "arrow";
 		that.style.view = "rounded";
 	}
-	
+	that.ico = spec.ico;
+	that.cls = spec.cls;
 	that.link = spec.link || null;
 	that.view = spec.view || null;
 	that.card = spec.card || null;
+	
 	that.data = spec.data || null;
 	
 	that.rendered = {};
@@ -228,10 +242,11 @@ Sink.component = function(spec){
 	that.renderView = spec.renderView || null;
 	that.renderCard = spec.renderCard || null;
 	
+	that.leaf = spec.leaf || false;
+	
 	
 	that.render = function(element){
-		try{
-				
+		//try{
 			switch(element){
 			
 				case "link" : 
@@ -249,21 +264,21 @@ Sink.component = function(spec){
 					that.rendered.card = true;
 					break;
 			};
-				
+		/*		
 		}catch(err){
-			console.log(err.message);
-		}
+			//console.log(err.message);
+		}*/
 	};
 	
 	that.update = function(data){
 	
 		that.data = data;
 		
-		try{
-			spec.update(that);
-		}catch(err){
+		//try{
+			if(spec.update)spec.update(that);
+		/*}catch(err){
 			console.log(err.description);
-		}
+		}*/
 	};
 	////////////////////////////////////////////////
 	//
@@ -282,12 +297,14 @@ Sink.component = function(spec){
 					break;
 					
 				case "view" : 
-					alert("display view");
+					Sink.renderer.selected.removeClass(".view.visible", "visible");
+					Sink.renderer.selected.addClass("#"+that.id, "visible");
 					that.displayed.view;
 					break;
 					
 				case "card" : 
-					alert("display card");
+					Sink.renderer.selected.removeClass(".card.visible", "visible");
+					Sink.renderer.selected.addClass("#card-"+that.id, "visible");
 					that.displayed.card = true;
 					break;
 			};
@@ -318,6 +335,8 @@ Sink.component = function(spec){
 	that.isDisplayed = function(element){
 		return that.displayed[element];
 	};
+	
+	
 	
 	
 	

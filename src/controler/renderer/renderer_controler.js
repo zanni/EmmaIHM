@@ -26,6 +26,8 @@ Sink.renderer.interface = function(){
 	
 	that.removeClass = null;
 	
+	that.hasClass = null;
+	
 	return that;
 	
 };

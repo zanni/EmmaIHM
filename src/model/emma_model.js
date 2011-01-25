@@ -48,7 +48,7 @@ Emma.resource = function(spec){
 	that.data = spec.data || null;
 	that.meta = spec.meta || null;
 	
-	that.log = spec.log || null;
+	that.log = spec.log || [];
 	
 	return that;
 };

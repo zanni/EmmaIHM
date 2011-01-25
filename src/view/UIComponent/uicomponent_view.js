@@ -8,17 +8,22 @@
 *		}
 *
 */
-UIComponent.view = function(){
+UIComponent.view = function(spec){
 
 	var that = UIComponent.component();
 	
-	that.render = function(spec){
+	that.id = spec.id;
+	that.items = spec.items;
+	
+	that.render = function(){
 		var render = "";
 		
-		render += "<div id='"+spec.id+"' class='"+Sink.viewCls+"'>";
-		if(spec.items)
-		for(var i=0;i<spec.items.length;i++){
-			render += spec.items[i];
+		render += "<div id='"+that.id+"' class='"+Sink.viewcls+"'>";
+		if(that.items){
+			for(var i=0;i<that.items.length;i++){
+				if(that.items[i].render) render += that.items[i].render();
+				else render += that.items[i];
+			}
 		}
 		render += "</div>";
 		
