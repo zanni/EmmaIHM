@@ -43,14 +43,11 @@ var led0 = function(){
 			var value;
 			if(component.data.data.value === 0) value = 1;
 			else value = 0;
-			alert(component.parent.id);
-			alert(component.name);
-			alert('{"value":'+value+'}');
+
 			Sink.controler.selected.order({
-				
-				host:component.parent.id,
+				host:component.parent.data.ip,
 				resource:component.name,
-				//data:'{"value":'+value+'}',
+				data:'{"value":'+value+'}',
 			});		
 		});
 		
@@ -61,7 +58,6 @@ var led0 = function(){
 		var resource = component.data;
 		var linkSelector = "#link-"+component.id;
 	
-		
 		if(resource.data.value === 0){
 			$(linkSelector+" img").removeClass("on");
 

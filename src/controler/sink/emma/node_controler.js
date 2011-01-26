@@ -69,6 +69,7 @@ var emmaControler = function(){
 					var resource_id = Emma.helper.getIdFromResource(host_data,resource_data);
 					var resource_component = Sink.find(resource_id);
 					if(resource_component){
+						resource_component.data = resource_data;
 						resource_component.update(resource_component);
 					}
 					else{
@@ -97,6 +98,7 @@ var emmaControler = function(){
 					
 					
 				}
+				//host_component.data = host_data;
 				host_component.update(host_data);
 			}
 			else{
@@ -178,36 +180,23 @@ var emmaControler = function(){
 			var data = component.data;
 			if(data.resource){
 				//component is an host
-				var widget = Sink.widget.provider.get("view");
+				var widget = Sink.widget.provider.get("view");				
+			}
+			else if(data.log){
+				//component is a resource
+				if(Sink.widget.provider.has("emma_"+data.data.name)){
+					var widget = Sink.widget.provider.get("emma_"+data.data.name);
+				}
+			}
+			if(widget){
 				switch(action){
 					case "renderLink":component.renderLink = widget.renderLink;break;
 					case "renderView":component.renderView = widget.render;break;
 					case "renderCard":component.renderCard = widget.render;break;
 					case "update":component.update = widget.update;break;
 				}
-				return null;
-				
 			}
-			else if(data.log){
-				//component is a resource
-				if(Sink.widget.provider.has("emma_"+data.data.name)){
-					var widget = Sink.widget.provider.get("emma_"+data.data.name);
-					switch(action){
-						case "renderLink":component.renderLink = widget.renderLink;break;
-						case "renderView":component.renderView = widget.render;break;
-						case "renderCard":component.renderCard = widget.render;break;
-						case "update":component.update = widget.update;break;
-					}
-					return null;
-					
-				}
-	
-			}
-
-
 		}
-		
-
 	};
 	
 	return that;
