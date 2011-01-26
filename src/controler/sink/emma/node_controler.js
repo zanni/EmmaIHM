@@ -10,15 +10,7 @@ var emmaControler = function(){
 	that.port = null;
 		
 	that.type = "node";
-	that.get = function(spec){	
-		/*
-		var request = Emma.parser.stringifyRequest({
-			"type":"node",
-			"host":spec.host,
-			"resource":spec.resource,
-		});	
-		*/
-		
+	that.get = function(spec){			
 		//dépendance comm
 		Sink.comm.selected.send({
 			url : "http://"+that.domain+":"+that.port+"/node/"+spec.host+"/"+spec.resource,
@@ -26,6 +18,14 @@ var emmaControler = function(){
 		});			
 
 		//return request;	
+	};
+	
+	that.order = function(spec){
+		Sink.comm.selected.send({
+			url : "http://"+that.domain+":"+that.port+"/node/"+spec.host+"/"+spec.resource,
+			data:spec.data,
+			method:"PUT",
+		});	
 	};
 	
 	
@@ -47,8 +47,9 @@ var emmaControler = function(){
 		});
 		component.load();
 		Sink.root.add(component);
+		
+		Sink.widget.load("emma_"+"led0");
 	};
-	
 	that.update = function(message){
 		var new_host = false;
 		var new_resource = false;
@@ -68,7 +69,7 @@ var emmaControler = function(){
 					var resource_id = Emma.helper.getIdFromResource(host_data,resource_data);
 					var resource_component = Sink.find(resource_id);
 					if(resource_component){
-						resource_component.update(resource_data);
+						resource_component.update(resource_component);
 					}
 					else{
 						resource_component = new Sink.component({
@@ -76,12 +77,17 @@ var emmaControler = function(){
 							"name":resource_id,
 							"data":resource_data,
 							"ico" : Sink.controler.uri+"emma/resource/emma.png",
-							"renderLink":Sink.widget.provider.get("view").renderLink,
+							//"renderLink":Sink.widget.provider.get("view").renderLink,
 							"renderCard":function(){
+							
 								Sink.widget.provider.get("card").render(this,"<p>mouai c cool</p>");
+								
 							},
+							
 							//"update":,
 						});
+						that.selectWidget(resource_component, "update");
+						that.selectWidget(resource_component, "renderLink");
 						host_component.add(resource_component);
 						
 						resource_component.render("card");
@@ -91,7 +97,7 @@ var emmaControler = function(){
 					
 					
 				}
-				host_component.update();
+				host_component.update(host_data);
 			}
 			else{
 				host_component = new Sink.component({
@@ -106,11 +112,18 @@ var emmaControler = function(){
 						"resource":"*",
 					}),
 					*/
-					"renderView":Sink.widget.provider.get("view").render,
-					"renderLink":Sink.widget.provider.get("view").renderLink,
+					//"renderView":that.selectWidget(host_component, "renderView"),
+					//"renderLink":that.selectWidget(host_component, "renderLink"),
 					//"renderCard":,
-					"update":Sink.widget.provider.get("view").update,
+					//"update":that.selectWidget(host_component, "update"),
 				});
+				
+				controler_root.add(host_component);
+				
+				that.selectWidget(host_component, "update");
+				that.selectWidget(host_component, "renderLink");
+				that.selectWidget(host_component, "renderView");
+				
 				
 				
 				new_host = true;
@@ -127,33 +140,75 @@ var emmaControler = function(){
 					else{
 						resource_component = new Sink.component({
 							"id":resource_id,
-							"name":resource_id,
+							"name":resource_data.data.name,
 							"data":resource_data,
 							"ico" : Sink.controler.uri+"emma/resource/emma.png",
 							"leaf":true,
 							//"ico" : Sink.controler.uri+NAME+"/resource/ico.png",
-							"renderLink":Sink.widget.provider.get("view").renderLink,
-							"renderCard":function(){
-								Sink.widget.provider.get("card").render(this,"<p>mouai c cool</p>");
-							},
+							//"renderLink":that.selectWidget(this, "renderLink"),
+							//"renderCard":that.selectWidget(this, "renderCard"),
+							//"update":that.selectWidget(this, "update"),
 							//"update":,
 						});
 						host_component.add(resource_component);
-						Sink.renderer.selected.appendHTML(Sink.body, resource_component.render("view"));
+						that.selectWidget(resource_component, "update");
+						that.selectWidget(resource_component, "renderLink");
+						
+						//that.selectWidget(resource_component, "renderLink");
+						
+						//alert(resource_component.render("view"));
+						//Sink.renderer.selected.appendHTML(Sink.body, resource_component.render("view"));
 						
 						//resource_component.render("card");
-						
+						new_resource = true;
 					}
 				}
-				controler_root.add(host_component);
-				Sink.renderer.selected.appendHTML(Sink.body, host_component.render("view"));
+				
+				//Sink.renderer.selected.appendHTML(Sink.body, host_component.render("view"));
+				host_component.render("view")
 			}
 			
 			if(new_host) controler_root.update();
 		}
 	};
 	
+	that.selectWidget = function(component, action){
 	
+		if(component && component.data){
+			var data = component.data;
+			if(data.resource){
+				//component is an host
+				var widget = Sink.widget.provider.get("view");
+				switch(action){
+					case "renderLink":component.renderLink = widget.renderLink;break;
+					case "renderView":component.renderView = widget.render;break;
+					case "renderCard":component.renderCard = widget.render;break;
+					case "update":component.update = widget.update;break;
+				}
+				return null;
+				
+			}
+			else if(data.log){
+				//component is a resource
+				if(Sink.widget.provider.has("emma_"+data.data.name)){
+					var widget = Sink.widget.provider.get("emma_"+data.data.name);
+					switch(action){
+						case "renderLink":component.renderLink = widget.renderLink;break;
+						case "renderView":component.renderView = widget.render;break;
+						case "renderCard":component.renderCard = widget.render;break;
+						case "update":component.update = widget.update;break;
+					}
+					return null;
+					
+				}
+	
+			}
+
+
+		}
+		
+
+	};
 	
 	return that;
 };

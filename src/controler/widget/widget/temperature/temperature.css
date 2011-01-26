@@ -1,0 +1,86 @@
+.temperature{
+    
+
+}
+
+.temperature .image{
+
+
+    background-image: url('src/controler/widget_controler/widget/temperature/resource/thermometre_2.jpg');
+    width: 100px;
+    height: 401px;
+    
+    position: relative;
+    float: left;
+    
+    background-position: right;
+   
+    background-repeat: no-repeat;
+
+
+
+}
+
+.temperature .line{
+    position: absolute;
+    left: 47%;
+    right: 15%;
+    bottom: 22%;
+    border-left: 1em solid #F4932C;
+    padding: 150%;
+    padding-left: 4%;
+    margin-left: 0.8%;
+    
+}
+
+
+.temperature .value{
+    position: relative;
+    float: left;
+    
+	font-size: 250%;
+
+	color:  #F4932C;
+}
+
+.temperature .unit{
+    position: relative;
+    margin-top: 10%;
+    padding-left: 1em;
+    float: left;
+	font-size: 180%;
+	line-height: 9%;
+	color:  #F4932C;
+}
+
+
+.temperature .bordure{
+
+    position: relative;
+    float: left;
+    left: 40%;
+    /*top: 33%;*/
+    top: 10em;
+	border-style: groove;
+    border-color: #F4932C;
+    
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 6%;
+    padding-left: 6%;
+	background: #C5C5C5;
+   
+
+	border-radius: 20em 20em; 
+
+}
+
+.temperature .bloc{
+
+position: relative;
+float: left;
+top: 7em;
+left: 20%
+
+
+}

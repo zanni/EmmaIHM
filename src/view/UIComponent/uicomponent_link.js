@@ -20,6 +20,7 @@ UIComponent.link = function(spec){
 	that.ico = spec.ico;
 	that.items = spec.items;
 	that.leaf = spec.leaf;
+	that.cls = spec.cls 
 	that.render = function(){
 		var ico = "";
 		var temp = "";
@@ -37,8 +38,10 @@ UIComponent.link = function(spec){
 			 href = " href='#"+that.id+"' ";
 		}
 		else cls = "leaf";
+		
+		if(that.cls) cls+= " "+that.cls;
 	
-	var link = "<li class='"+that.style+" "+cls+"'><a id='link-"+that.id+"' "+href+"><img src='"+that.ico+"'></img><span>"+that.name+"</span></a></li>";
+	var link = "<li class='"+that.style+" "+cls+"'><a id='link-"+that.id+"' "+href+"><img "+ico+"></img><span>"+that.name+"</span></a>"+temp+"</li>";
 		
 		return link;
 	};

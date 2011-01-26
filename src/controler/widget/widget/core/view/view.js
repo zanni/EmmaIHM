@@ -26,13 +26,7 @@ var view = function(){
 					style:"back",
 			}).render());
 		}
-		//if Mobile view, add navigation select to navigation bar 
-		/*
-		if(Sink.isMobile()) {
-			Sink.renderer.selected.addClass(".navigation_button","visible");
-		
-		};
-		*/
+	
 		
 		//create navigation list 
 		var item;
@@ -71,6 +65,7 @@ var view = function(){
 			style:component.list_style+ " vertical-scroll",
 			items:[
 				UIComponent.toolbar({
+					//name: component.name, 
 					items:bar_items,
 				}),
 				UIComponent.list({
@@ -94,21 +89,24 @@ var view = function(){
 	
 	that.renderLink = function(component){
 		//alert("view widget renderLink: "+component.id);
-	
+		//alert("link: "+component.id);
 		var link = UIComponent.link({
 					id:component.id,
 					name:component.name,
 					ico:component.ico,
 					leaf:component.leaf,
-				}).render();
+		}).render();
 		Sink.renderer.selected.appendHTML("#link-"+component.id, link);
 		
 	};
 	
 	that.update = function(component){
 		//alert("view widget update: "+component.id);
-		Sink.renderer.selected.removeHTML("#"+component.id);
-		component.render("view");
+		if(component.renderView){
+			Sink.renderer.selected.removeHTML("#"+component.id);
+			component.render("view");
+		}
+		
 	};
 	
 	return that;

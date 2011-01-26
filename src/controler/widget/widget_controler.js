@@ -20,33 +20,21 @@ Sink.widget.interface = function(){
 
 Sink.widget.provider = IoC.makeProvider(Sink.widget.interface);
 
-Sink.widget.load = function(name, callback_success){
+Sink.widget.load = function(name){
 	
 	var url = Sink.widget.uri+name+"/"+name;
-	$.ajax({
-		url:url+".html",
-		success:function(html){
-			
-			
+	
+	$.ajax({url:url+".js",async:false, success:function(){
+		$.ajax({
+			url:url+".css",
+			success:function(data){
+				 $("<style></style>").appendTo("head").html(data);
+			}
+		});
 
-			//load css file
-			$.ajax({
-				url:url+".css",
-				success:function(data){
-					 $("<style></style>").appendTo("head").html(data);
-				}
-			});
-			//load js file
-			$.getScript(url+".js", function(){
-				
-				var widget = Sink.widget.provider.get(name);
-				widget.init();
-				
-				callback_success();
-				
-			});
-		},
-	});
+		//var widget = Sink.widget.provider.get(name);
+		//widget.init();		
+		
+	}});
 };
 
-Sink.widget.select = null;

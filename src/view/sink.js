@@ -116,6 +116,7 @@ var Sink = {};
 Sink.linkcls = null;
 Sink.viewcls = null;
 Sink.cardcls = null;
+Sink.mobilemaxwidth = null;
 
 Sink.body = null;
 Sink.mobilecls = null;
@@ -137,7 +138,7 @@ Sink.comm = null;
 Sink.isScreen = function(){
 	var xMax = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	var yMax = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-	if(xMax >= 600) return true;
+	if(xMax >= Sink.mobilemaxwidth) return true;
 	else return false;
 };
 Sink.isMobile = function(){
@@ -154,8 +155,8 @@ Sink.isTablette = function(){
 };
 
 
-Sink.view_visible = false;
-Sink.isViewVisible = function(){return view_visible};
+Sink.viewVisible = false;
+Sink.isViewVisible = function(){return Sink.viewVisible};
 
 
 
@@ -270,9 +271,8 @@ Sink.component = function(spec){
 		}*/
 	};
 	
-	that.update = function(data){
+	that.update = function(){
 	
-		that.data = data;
 		
 		//try{
 			if(spec.update)spec.update(that);
@@ -297,8 +297,14 @@ Sink.component = function(spec){
 					break;
 					
 				case "view" : 
-					Sink.renderer.selected.removeClass(".view.visible", "visible");
-					Sink.renderer.selected.addClass("#"+that.id, "visible");
+					/***********************************************
+					/*
+						view displaying is managed by jqtouch with 
+						"current" cls
+					*/					
+					/**********************************************/
+					//Sink.renderer.selected.removeClass(".view.visible", "visible");
+					//Sink.renderer.selected.addClass("#"+that.id, "visible");
 					that.displayed.view;
 					break;
 					

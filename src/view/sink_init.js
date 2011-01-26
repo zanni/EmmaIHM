@@ -60,6 +60,8 @@ Sink.init = function(spec){
 	Sink.tablettecls = spec.tablettecls || "tablette";
 	Sink.screencls = spec.screencls || "screen";
 	
+	Sink.mobilemaxwidth = spec.mobilemaxwidth || 800;
+	
 	Sink.root = spec.root;
 	
 	//try{
@@ -68,8 +70,8 @@ Sink.init = function(spec){
 		Sink.renderer.selected = Sink.renderer.provider.get(spec.renderer);
 		
 		
-		var controler = Sink.controler.provider.get(spec.controler);	
-		controler.init(spec.comm);
+		Sink.controler.selected = Sink.controler.provider.get(spec.controler);	
+		Sink.controler.selected.init(spec.comm);
 		
 		//need child loaded i.e controler init
 		Sink.root.render("view");
@@ -80,6 +82,7 @@ Sink.init = function(spec){
 		
 		
 		Sink.currentView = Sink.root;
+		Sink.currentCard = Sink.root;
 		
 		
 		/*	
@@ -101,7 +104,28 @@ Sink.init = function(spec){
 	var xMax = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	var yMax = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	
-	$('body').css({"height":yMax,"width":xMax});
+	$(Sink.body).css({"height":yMax,"width":xMax});
+	
+	if(Sink.isScreen()){
+			$(Sink.body).addClass(Sink.screencls);
+			$(".view_button").removeClass("visible");
+			$("#card-"+Sink.currentCard.id).addClass("visible");
+		}
+		else if(Sink.isMobile()){
+			$(Sink.body).addClass(Sink.mobilecls);
+			$(".view_button").addClass("visible");
+		}
+		else if(Sink.isTablette()){
+		
+			////////////////////////////////////////////////
+			//
+			//TODO - implement tablette recocgnizing
+			//
+			////////////////////////////////////////////////		
+			$(Sink.body).addClass(Sink.screencls);
+			$(".view_button").removeClass("visible");
+			$("#card-"+sink.currentCard.id).addClass("visible");
+		}
 
 	
 	Sink.initCoreEvents();
