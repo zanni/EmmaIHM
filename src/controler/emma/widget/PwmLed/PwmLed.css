@@ -1,0 +1,43 @@
+
+.slider {
+    -moz-border-radius: 5px 5px 5px 5px;
+    -moz-box-shadow: 0 0 8px #000000 inset;
+    background: url("../../../img/gradient/h30.png") repeat-x scroll 0 0 #3C72E6;
+    border: 1px solid #333333;
+    clear: right;
+    cursor: pointer;
+    float: left;
+    height: 9px;
+    margin-top: 10px;
+    position: relative;
+    width: 675px;
+}
+.progress {
+    background-color: #C5FF00;
+    display: none;
+    height: 9px;
+    opacity: 0.6;
+}
+.handle {
+    -moz-border-radius: 14px 14px 14px 14px;
+    -moz-box-shadow: 0 0 6px #000000;
+    background: url("../../../img/gradient/h30.png") repeat-x scroll 0 0 #FFFFFF;
+    border: 1px solid #000000;
+    cursor: move;
+    display: block;
+    height: 28px;
+    margin-top: 1px;
+    position: absolute;
+    top: -12px;
+    width: 28px;
+}
+.range {
+    -moz-border-radius: 5px 5px 5px 5px;
+    border: 1px inset #DDDDDD;
+    float: left;
+    font-size: 20px;
+    margin: 0 0 0 15px;
+    padding: 3px 0;
+    text-align: center;
+    width: 50px;
+}

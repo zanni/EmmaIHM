@@ -4,21 +4,6 @@ Sink.initCoreEvents = function(){
 			var component = Sink.find($(this).attr("id").replace("link-",""));
 			
 			Sink.currentView = component;
-			/*
-			if(component.children && component.children.length > 0){
-				
-				for(var i in component.children){
-					child = component.chilren[i];
-					if(child.card || child.renderCard){
-						child.render("card");
-					}
-					if(child.load){
-						child.load();
-					}
-				}
-			}
-			*/
-			
 			
 			if((component.card || component.renderCard)){
 				Sink.renderer.selected.removeHTML("#card-"+Sink.currentCard.id);
@@ -53,22 +38,6 @@ Sink.initCoreEvents = function(){
 	    	
 			
 	});
-	/*
-	$('.view li.leaf a').tap(function(){
-	    	var component = sink.find($(this).attr("id").replace("link-",""));
-	    	if(component.card) {
-				
-				component.displayCard();
-				
-				if(!sink.isScreenView()){
-					sink.navigationVisible = false;
-					$(".navigation").removeClass("visible");
-					$("#"+sink.currentCard.id).addClass("visible");
-				}
-			}		
-			
-	});
-	*/
 	/*
 	 $(".back").tap(function(){
 		sink.currentNavigation.unrenderChild();

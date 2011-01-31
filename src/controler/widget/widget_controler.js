@@ -1,6 +1,6 @@
 Sink.widget = {};
 
-Sink.widget.uri = "src/controler/widget/widget/";
+Sink.widget.core_path = "src/controler/widget/core/";
 
 Sink.widget.interface = function(){
 	
@@ -20,21 +20,13 @@ Sink.widget.interface = function(){
 
 Sink.widget.provider = IoC.makeProvider(Sink.widget.interface);
 
-Sink.widget.load = function(name){
+Sink.widget.load = function(path){
 	
-	var url = Sink.widget.uri+name+"/"+name;
-	
-	$.ajax({url:url+".js",async:false, success:function(){
-		$.ajax({
-			url:url+".css",
-			success:function(data){
-				 $("<style></style>").appendTo("head").html(data);
-			}
-		});
-
-		//var widget = Sink.widget.provider.get(name);
-		//widget.init();		
-		
-	}});
+	url = path;
+	$.ajax({url:url+".js",async:false});
 };
+Sink.widget.load("src/controler/widget/core/card/card");
+Sink.widget.load("src/controler/widget/core/view/view");
+Sink.widget.load("src/controler/widget/core/chart/chart");
+
 

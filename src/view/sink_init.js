@@ -14,82 +14,22 @@ var jQT = new $.jQTouch({
             	touchSelector: "body > * > ul li:not(.leaf) a",
                 
 });
-
-$(function(){
-
-	
-	
-	
-	
-	
-			
-});
-/*************************************************************/
-/*************************************************************/
-/*
-	sink root declaration & init
-	
-	input :
-	
-		spec = {
-			id : {id},
-			parent : {parent},
-			children : [...],
-			loadChild : function(component){...},
-						
-			card : {card},
-			renderView : callback
-			renderCard : callback
-			
-			renderer : {renderer},
-			comm : {comm},
-			controler : {controler},
-			
-		}
-*/
 /*************************************************************/
 
-Sink.init = function(spec){
-	Sink.linkcls = spec.linkcls || "link";
-	Sink.viewcls = spec.viewcls || "view";
-	Sink.cardcls = spec.cardcls || "card";
+Sink.init = function(){
+
+	Sink.renderer.selected = Sink.renderer.provider.get("jquery");
 	
-	Sink.body = spec.body || "body";
+	Sink.root.render("view");
+	Sink.root.render("card");
 	
-	Sink.mobilecls = spec.mobilecls || "mobile";
-	Sink.tablettecls = spec.tablettecls || "tablette";
-	Sink.screencls = spec.screencls || "screen";
+	Sink.root.display("card");
+	Sink.root.display("view");
 	
-	Sink.mobilemaxwidth = spec.mobilemaxwidth || 800;
 	
-	Sink.root = spec.root;
-	
-	//try{
-		
-		Sink.comm.selected = Sink.comm.provider.get(spec.comm.name);
-		Sink.renderer.selected = Sink.renderer.provider.get(spec.renderer);
-		
-		
-		Sink.controler.selected = Sink.controler.provider.get(spec.controler);	
-		Sink.controler.selected.init(spec.comm);
-		
-		//need child loaded i.e controler init
-		Sink.root.render("view");
-		Sink.root.render("card");
-		
-		Sink.root.display("card");
-		Sink.root.display("view");
-		
-		
-		Sink.currentView = Sink.root;
-		Sink.currentCard = Sink.root;
-		
-		
-		/*	
-		
-	}catch(err){
-		console.log(err);
-	}*/
+	Sink.currentView = Sink.root;
+	Sink.currentCard = Sink.root;
+
 	
 	if(Sink.isScreen()){
 		Sink.renderer.selected.addClass(Sink.body, Sink.screencls);

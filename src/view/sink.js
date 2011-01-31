@@ -113,15 +113,19 @@ var TreeComponent = function(spec){
 *		
 */
 var Sink = {};
-Sink.linkcls = null;
-Sink.viewcls = null;
-Sink.cardcls = null;
-Sink.mobilemaxwidth = null;
 
-Sink.body = null;
-Sink.mobilecls = null;
-Sink.tablettecls = null;
-Sink.screencls = null;
+
+Sink.linkcls =  "link";
+Sink.viewcls =  "view";
+Sink.cardcls =  "card";
+
+Sink.body =  "body";
+
+Sink.mobilecls =  "mobile";
+Sink.tablettecls =  "tablette";
+Sink.screencls =  "screen";
+
+Sink.mobilemaxwidth = 800;
 
 Sink.currentCard = null;
 Sink.currentView = null;
