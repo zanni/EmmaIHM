@@ -28,5 +28,7 @@ Sink.widget.load = function(path){
 Sink.widget.load("src/controler/widget/core/card/card");
 Sink.widget.load("src/controler/widget/core/view/view");
 Sink.widget.load("src/controler/widget/core/chart/chart");
+Sink.widget.load("src/controler/widget/core/slider/slider");
+
 
 

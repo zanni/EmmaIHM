@@ -15,9 +15,12 @@ var homeCard = function(){
 	};
 	that.render = function(component){
 		var items = [];
-		
+		/*
 		var widget = Sink.widget.provider.get("card");
 		widget.render(component, "<div><strong>Bienvenue sur Emma</string></div><img src='resource/emma/theme/logo_emma.png'><div>powered by EmmaIHM v0.1</div>");
+		*/
+		var slider = Sink.widget.provider.get("slider");
+		slider.render(component);
 		
 	};
 	
