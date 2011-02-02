@@ -267,19 +267,7 @@ var emmaControler = function(){
 	var that = {};
 	
 	
-	/***********************************************
-	/*
-		init Sink
-	*/
-	
 
-		"renderCard":Sink.widget.provider.get("home").render,
-		//"renderLink":function(){alert("renderLink");},
-	});
-					
-	Sink.root = sink;
-	
-	/**********************************************/
 	/***********************************************
 	/*
 		init controler root
