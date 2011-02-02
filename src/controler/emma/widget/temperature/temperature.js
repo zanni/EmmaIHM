@@ -33,7 +33,8 @@ var temperature = function(){
 					ico:Emma.widget_path+"temperature/resource/temperature.png",
 					items:['<span class="toggle"><p>'+resource.data.value+' '+resource.data.unit+'</p></span>'],
 				}).render();	
-		Sink.renderer.selected.appendHTML("#link-"+component.id, html);
+		//Sink.renderer.selected.appendHTML("#link-"+component.id, html);
+		$("#link-"+component.id).append(html);
 	}
 	
 	that.update = function(host, resource){

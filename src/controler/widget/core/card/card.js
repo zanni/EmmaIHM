@@ -25,7 +25,8 @@ var card = function(){
 			id:component.id,
 			items:items,
 		});		
-		Sink.renderer.selected.appendHTML(Sink.body,component.render());
+		//Sink.renderer.selected.appendHTML(Sink.body,component.render());
+		$(Sink.body).append(component.render());
 		
 	};
 	

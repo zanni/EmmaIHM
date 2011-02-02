@@ -6,7 +6,8 @@ Sink.initCoreEvents = function(){
 			Sink.currentView = component;
 			
 			if((component.card || component.renderCard)){
-				Sink.renderer.selected.removeHTML("#card-"+Sink.currentCard.id);
+				//Sink.renderer.selected.removeHTML("#card-"+Sink.currentCard.id);
+				$("#card-"+Sink.currentCard.id).remove();
 				Sink.currentCard.rendered.card = false;
 				Sink.currentCard.displayed.card = false;
 				if(!component.rendered.card){
@@ -21,10 +22,12 @@ Sink.initCoreEvents = function(){
 				Sink.viewVisible = false;
 				if(Sink.isMobile()){
 					if(Sink.isViewVisible()){
-						Sink.renderer.selected.removeClass(Sink.viewcls, "visible");
+						//Sink.renderer.selected.removeClass(Sink.viewcls, "visible");
+						$(Sink.viewcls).removeClass("visible");
 					}
 					else {
-						Sink.renderer.selected.addClass(Sink.viewcls, "visible");
+						//Sink.renderer.selected.addClass(Sink.viewcls, "visible");
+						$(Sink.viewcls).addClass("visible");
 					}
 				}
 

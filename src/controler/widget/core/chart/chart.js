@@ -14,7 +14,6 @@ var chart = function(){
 	var url = Sink.widget.core_path+"chart/resource/"+"jquery.flot.js";
 	$.getScript(url);
 	
-	that.html = null;
 	$.ajax({
 		url:Sink.widget.core_path+"chart/chart.html",
 		success:function(data){

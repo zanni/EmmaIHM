@@ -30,7 +30,8 @@ var brightness = function(){
 					ico:Emma.widget_path+"brightness/resource/brightness.png",
 					items:['<span class="toggle"><p>'+resource.data.value+' '+resource.data.unit+'</p></span>'],
 				}).render();	
-		Sink.renderer.selected.appendHTML("#link-"+component.id, html);
+		//Sink.renderer.selected.appendHTML("#link-"+component.id, html);
+		$("#link-"+component.id).append(html);
 	}
 	
 	that.update = function(host, resource){
