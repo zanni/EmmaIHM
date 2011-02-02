@@ -313,8 +313,8 @@ Sink.component = function(spec){
 					break;
 					
 				case "card" : 
-					Sink.renderer.selected.removeClass(".card.visible", "visible");
-					Sink.renderer.selected.addClass("#card-"+that.id, "visible");
+					$(".card.visible").removeClass( "visible");
+					$("#card-"+that.id).addClass( "visible");
 					that.displayed.card = true;
 					break;
 			};

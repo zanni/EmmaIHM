@@ -18,7 +18,7 @@ var jQT = new $.jQTouch({
 
 Sink.init = function(){
 
-	Sink.renderer.selected = Sink.renderer.provider.get("jquery");
+	//Sink.renderer.selected = Sink.renderer.provider.get("jquery");
 	
 	Sink.root.render("view");
 	Sink.root.render("card");
@@ -32,13 +32,16 @@ Sink.init = function(){
 
 	
 	if(Sink.isScreen()){
-		Sink.renderer.selected.addClass(Sink.body, Sink.screencls);
+		//Sink.renderer.selected.addClass(Sink.body, Sink.screencls);
+		$(Sink.body).addClass(Sink.screencls);
 	}
 	else if(Sink.isTablette()){
-		Sink.renderer.selected.addClass(Sink.body, Sink.tablettecls);
+		$(Sink.body).addClass(Sink.tablettecls);
+		//Sink.renderer.selected.addClass(Sink.body, Sink.tablettecls);
 	}
 	else if(Sink.isMobile()){
-		Sink.renderer.selected.addClass(Sink.body, Sink.mobilecls);
+		$(Sink.body).addClass(Sink.mobilecls);
+		//Sink.renderer.selected.addClass(Sink.body, Sink.mobilecls);
 	}
 	
 	var xMax = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

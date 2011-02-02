@@ -30,7 +30,8 @@ var led0 = function(){
 					leaf:component.leaf,
 					items:['<span class="toggle"><input type="checkbox"></input></span>'],
 		}).render();
-		Sink.renderer.selected.appendHTML("#link-"+component.id, link);
+		//Sink.renderer.selected.appendHTML("#link-"+component.id, link);
+		$("#link-"+component.id).append(link);
 		
 		var linkSelector = "#link-"+component.id;
 		if(component.data.data.value === 0){

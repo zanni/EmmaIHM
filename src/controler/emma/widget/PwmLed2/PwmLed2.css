@@ -1,0 +1,46 @@
+.slider_info{
+	-webkit-box-sizing: border-box;
+	border-radius: 10px 10px; 
+	-webkit-text-size-adjust: none;
+	-webkit-user-select: none;
+	width: 130px;
+	height: 60px;
+	margin-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	background: #C5C5C5;
+	text-align: center;
+}
+
+.slider_info .value{
+	margin-top: 5px;
+	margin-left: auto;
+	font-size: 48px;
+	line-height: 40px;
+	color: #808080;
+}
+
+.slider_info .unit{
+	margin-right: auto;
+	margin-top: 5px;
+	font-size: 24px;
+	line-height: 20px;
+	color: #8F8FA7;
+}
+
+#slider{
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+
+.dragdealer {
+	
+	padding: 0;
+	margin: 0;
+	vertical-align: baseline;
+	outline: 0px;
+}

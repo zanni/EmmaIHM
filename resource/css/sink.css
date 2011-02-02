@@ -1,18 +1,15 @@
 body{
 	background: white;
-	height: 100%;
-	width:100%;
+
 	
 }
 
 
 
 div.card{
-	overflow-x: hidden;
 	height: inherit;
-	text-align: center;
 	border-left: solid #2D3642 1px;
-	z-index: 1;
+	z-index: 2;
 }
 div.view{
 	display : none;

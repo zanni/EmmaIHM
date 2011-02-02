@@ -36,6 +36,7 @@ Sink.widget.load(Emma.widget_path+"led0/led0");
 Sink.widget.load(Emma.widget_path+"temperature/temperature");
 Sink.widget.load(Emma.widget_path+"brightness/brightness");
 Sink.widget.load(Emma.widget_path+"home/home");
+Sink.widget.load(Emma.widget_path+"PwmLed2/PwmLed2");
 
 /**********************************************/
 
@@ -276,7 +277,7 @@ var emmaControler = function(){
 		"name":"Home",
 		"renderView":Sink.widget.provider.get("view").render,
 	
-		"renderCard":Sink.widget.provider.get("home_card").render,
+		"renderCard":Sink.widget.provider.get("home").render,
 		//"renderLink":function(){alert("renderLink");},
 	});
 					

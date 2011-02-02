@@ -14,6 +14,10 @@ UIComponent.slider = function(spec){
 	
 	that.id = spec.id;
 	
+	that.init = spec.init;
+	
+	
+	
 	that.render = function(){
 		var render = "";
 		render += "<div id='"+that.id+"' class='dragdealer rounded-cornered'>";
@@ -22,6 +26,10 @@ UIComponent.slider = function(spec){
 		return render;
 	};
 	
+	$.elementReady(that.id,function(){
+		new Dragdealer(that.id,that.init);
+	});
+		
 	return that;
 };
 

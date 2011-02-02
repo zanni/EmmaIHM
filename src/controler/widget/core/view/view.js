@@ -75,7 +75,8 @@ var view = function(){
 			],
 		});
 		
-		Sink.renderer.selected.appendHTML(Sink.body,component.render());
+		//Sink.renderer.selected.appendHTML(Sink.body,component.render());
+		$(Sink.body).append(component.render());
 		
 		if(children){
 			for(var i=0;i<children.length;i++){
@@ -96,14 +97,15 @@ var view = function(){
 					ico:component.ico,
 					leaf:component.leaf,
 		}).render();
-		Sink.renderer.selected.appendHTML("#link-"+component.id, link);
-		
+		//Sink.renderer.selected.appendHTML("#link-"+component.id, link);
+		$("#link-"+component.id).append(link);
 	};
 	
 	that.update = function(component){
 		//alert("view widget update: "+component.id);
 		if(component.renderView){
-			Sink.renderer.selected.removeHTML("#"+component.id);
+			//Sink.renderer.selected.removeHTML("#"+component.id);
+			$("#"+component.id).remove();
 			component.render("view");
 		}
 		
