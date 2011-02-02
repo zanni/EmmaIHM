@@ -272,7 +272,12 @@ var emmaControler = function(){
 		init Sink
 	*/
 	
-	
+
+		"renderCard":Sink.widget.provider.get("home").render,
+		//"renderLink":function(){alert("renderLink");},
+	});
+					
+	Sink.root = sink;
 	
 	/**********************************************/
 	/***********************************************
