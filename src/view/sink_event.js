@@ -1,18 +1,21 @@
 Sink.initCoreEvents = function(){
 	$('.view li a').tap(function(){
-			
 			var component = Sink.find($(this).attr("id").replace("link-",""));
 			
 			Sink.currentView = component;
-			
+			for(var i in component.children){
+				component.children[i].load(component.children[i]);
+			}
 			if((component.card || component.renderCard)){
 				//Sink.renderer.selected.removeHTML("#card-"+Sink.currentCard.id);
 				$("#card-"+Sink.currentCard.id).remove();
 				Sink.currentCard.rendered.card = false;
 				Sink.currentCard.displayed.card = false;
 				if(!component.rendered.card){
+					
 					component.render("card");
 					component.display("card");
+					
 					Sink.currentCard = component;
 				}
 				else if(!component.displayed.card){

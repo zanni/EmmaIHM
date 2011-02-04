@@ -1,0 +1,29 @@
+.itunes img{
+	border: solid 1px black;
+	margin-top: 20px;
+}
+
+.itunes #previous{
+
+}
+
+.itunes #playpause img{
+	background:url("src/controler/service/widget/itunes/resource/pause.png");
+	width: 64px;
+	height: 64px;
+}
+
+.itunes #playpause.play img{
+	background:url("src/controler/service/widget/itunes/resource/play.png");
+	width: 64px;
+	height: 64px;
+}
+
+.itunes #stop{
+
+}
+
+.itunes #next{
+
+}
+

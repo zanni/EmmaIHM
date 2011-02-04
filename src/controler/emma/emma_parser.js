@@ -11,6 +11,7 @@ Emma.parser.parseHost = function(json){
 		});		
 		//for each resource
 		for(var j=0;j<model.payload[i].ressources.length;j++){
+			
 			var text = "";
 			//get data
 			//alert(model.payload[i].ressources[j].name);
@@ -36,6 +37,7 @@ Emma.parser.parseHost = function(json){
 					if(name && uri && data && meta){
 						//instanciate resource object
 						var resource = new Emma.resource({
+							
 							uri:uri,
 							data:data,
 							meta:meta,

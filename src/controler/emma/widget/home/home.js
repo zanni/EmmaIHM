@@ -17,7 +17,38 @@ var home = function(){
 		var items = [];
 		
 		var widget = Sink.widget.provider.get("card");
-		widget.render(component, "<div><strong>Bienvenue sur Emma</string></div><img src='resource/emma/theme/logo_emma.png'><div>powered by EmmaIHM v0.1</div>");
+		
+		var card_html = "<div><strong>Bienvenue sur Emma</string></div><img src='resource/emma/theme/logo_emma.png'><div>powered by EmmaIHM v0.1</div>";
+		
+		card_html = new UIComponent.slideshow({
+			id:"slideshow",
+			slide:[
+				{
+					title:"slide 1",
+					description:"desc 1",
+					content:"<p>mouai c cool</p>",
+				},
+				{
+					title:"slide 2",
+					description:"desc 2",
+					content:"<p>mouai c cool</p>",
+				},
+				{
+					title:"slide 3",
+					description:"desc 3",
+					content:"<p>mouai c cool</p>",
+				},
+				{
+					title:"slide 4",
+					description:"desc 4",
+					content:"<p>mouai c cool</p>",
+				},
+			],
+			init:{
+				
+			},
+		});
+		widget.render(component, card_html);
 		
 		
 	};

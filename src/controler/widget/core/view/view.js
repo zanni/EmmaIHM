@@ -98,6 +98,7 @@ var view = function(){
 					leaf:component.leaf,
 		}).render();
 		//Sink.renderer.selected.appendHTML("#link-"+component.id, link);
+
 		$("#link-"+component.id).append(link);
 	};
 	

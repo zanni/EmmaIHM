@@ -1,10 +1,9 @@
 /*
 *
-*	UIComponent.toolbar 
+*	UIComponent.slider 
 *	input : 
 *		{
 *			name:"name",
-*			items:[UIComponent.button(...), ...], //array of HTML elements
 *		}
 *
 */

@@ -42,7 +42,7 @@ Emma.host = function(spec){
 Emma.resource = function(spec){
 	var that = {};
 	
-	that.type = spec.type || null;
+	that.name = spec.name || null;
 	
 	that.uri = spec.uri || null;
 	that.data = spec.data || null;
