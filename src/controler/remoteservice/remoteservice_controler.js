@@ -1,6 +1,6 @@
 RemoteService = {};
 
-RemoteService.domain = "localhost";
+RemoteService.domain = "192.168.0.13";
 RemoteService.port = 8182;
 
 RemoteService.comm = Sink.comm.provider.get("CrossDomainAjax");
@@ -43,7 +43,6 @@ RemoteService.update = function(message){
 		RemoteService.selectWidget(host_component);
 
 		controler_root.add(host_component);
-		host_component.render("view");
 			
 		
 		controler_root.update();
@@ -51,32 +50,35 @@ RemoteService.update = function(message){
 
 };
 
-RemoteService.loadFile = function(component, data){
+RemoteService.loadFile = function(component){
 	RemoteService.comm.send({
-		url:"http://"+RemoteService.domain+":"+RemoteService.port+"/"+component.name+"/path",
-		method:"GET",
-		data:data,
+		url:"http://"+RemoteService.domain+":"+RemoteService.port+"/Media/path",
+		method:"PUT",
+		data:'{"path":"/"}',
 		success:function(data){
-			var file = data.split("\n");
+			var file = data.split("::");
+			
 			for(var i in file){
+				var name = file[i].replace(" ","").replace("Ž", "e");
 				var new_component = new Sink.component({
-					"id":component.id+file[i],
-					"name":file[i],
+					"id":component.id+"-"+name,
+					"name":component.name+name,
 					"ico" : "resource/folder/green.png",
+					"data":'{"path":"/'+component.name+name+'"}',
 				});
-				//new_component.load=RemoteService.loadFile	;
 
 				component.add(new_component);
-				widget = Sink.widget.provider.get("view");
+				var widget = Sink.widget.provider.get("view");
 				new_component.renderView = widget.render;
 				new_component.renderLink = widget.renderLink;
 				new_component.update = widget.update;
-				new_component.load = RemoteService.loadFile
-				//new_component.render("view")
+				new_component.load = RemoteService.loadFile;
+				
 				
 				
 			}
 			component.update(component);
+			
 		},
 	});
 };
@@ -93,11 +95,16 @@ RemoteService.selectWidget = function(component, action){
 		component.renderView = widget.render;
 		component.renderLink = widget.renderLink;
 		component.update = widget.update;
+		component.data = '{"path":"/"}';
 		component.load = RemoteService.loadFile
-		//component.load(component);
 		
 		
 		
+		
+		
+	}
+	
+	else{
 		
 	}
 	

@@ -8,13 +8,13 @@
 }
 
 .itunes #playpause img{
-	background:url("src/controler/service/widget/itunes/resource/pause.png");
+	background:url("src/controler/remoteservice/widget/itunes/resource/pause.png");
 	width: 64px;
 	height: 64px;
 }
 
 .itunes #playpause.play img{
-	background:url("src/controler/service/widget/itunes/resource/play.png");
+	background:url("src/controler/remoteservice/widget/itunes/resource/play.png");
 	width: 64px;
 	height: 64px;
 }
