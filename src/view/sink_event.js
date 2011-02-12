@@ -4,7 +4,7 @@ Sink.initCoreEvents = function(){
 			
 			Sink.currentView = component;
 			for(var i in component.children){
-				component.children[i].load(component.children[i]);
+				if(!component.children[i].loaded)component.children[i].load(component.children[i]);
 			}
 			if((component.card || component.renderCard)){
 				//Sink.renderer.selected.removeHTML("#card-"+Sink.currentCard.id);

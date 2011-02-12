@@ -1,6 +1,6 @@
 RemoteService = {};
 
-RemoteService.domain = "192.168.0.13";
+RemoteService.domain = "localhost";
 RemoteService.port = 8182;
 
 RemoteService.comm = Sink.comm.provider.get("CrossDomainAjax");
@@ -49,36 +49,92 @@ RemoteService.update = function(message){
 	}
 
 };
+////////////////////////////////////////////////
+//
+//TODO - usine ˆ gaz ...
+//
+//		- give automatic id for Sink.Component
+//		- find an elegant way to retreive component path
+//			(not using the name)
+//		- format name 
+//
+////////////////////////////////////////////////
 
 RemoteService.loadFile = function(component){
+
+	var prefix = component.data.replace(RegExp(" ", "gi"), "%20");
 	RemoteService.comm.send({
 		url:"http://"+RemoteService.domain+":"+RemoteService.port+"/Media/path",
 		method:"PUT",
-		data:'{"path":"/"}',
+		data:'{"path":"'+prefix+'"}',
 		success:function(data){
 			var file = data.split("::");
 			
+			
 			for(var i in file){
-				var name = file[i].replace(" ","").replace("Ž", "e");
-				var new_component = new Sink.component({
-					"id":component.id+"-"+name,
-					"name":component.name+name,
-					"ico" : "resource/folder/green.png",
-					"data":'{"path":"/'+component.name+name+'"}',
-				});
-
-				component.add(new_component);
-				var widget = Sink.widget.provider.get("view");
-				new_component.renderView = widget.render;
-				new_component.renderLink = widget.renderLink;
-				new_component.update = widget.update;
-				new_component.load = RemoteService.loadFile;
+				if(file[i] !== "" && file[i].indexOf("Icon")){
+					var name = file[i];
+					var id = name.split(".")[0];
+					id = id.split("+")[0];
+					id = id.replace(RegExp(" ", "gi"), "")
+									.replace(RegExp("\"", "gi"), "")
+									.replace(RegExp("\'", "gi"), "")
+									.replace(RegExp(",", "gi"), "");
+									
+									
+					var view = Sink.widget.provider.get("view");
+					if(name.split(".avi").length == 1){
+						
+						var new_component = new Sink.component({
+							"id":component.id+"-"+id,
+							"name":name,
+							"ico" : "resource/folder/green.png",
+							"data": prefix+name+"/",
+							"leaf":false,
+							"load":RemoteService.loadFile,
+							"renderView" : view.render,
+							"renderLink" : view.renderLink, 
+							"update" : view.update,
+						});
+					}
+					else{
 				
+						var new_component = new Sink.component({
+							"id":component.id+"-"+id,
+							"name":name,
+							"ico" : "resource/folder/yellow.png",
+							"data": prefix+name,
+							"leaf":true,
+							"renderLink" : view.renderLink, 
+							"renderCard":function(component){
+								var prefix = component.data.replace(RegExp(" ", "gi"), "%20");
+								var name = component.name.replace(RegExp(" ", "gi"), "%20");
+								//alert("render card: "+prefix+"/"+component.name );
+								//alert("url: "+"http://"+RemoteService.domain+":"+RemoteService.port+"/Media/path");
+								RemoteService.comm.send({
+									url:"http://"+RemoteService.domain+":"+RemoteService.port+"/Media/path",
+									method:"PUT",
+									data:'{"path":"'+prefix+'"}',
+									success:function(data){
+										alert(prefix);
+										
+									},
+								});
+								//var card = Sink.widget.provider.get("card");
+								//card.render(this, "mouai c cool");
+								
+							},
+						});
+					}
+					
+					
+					//alert('{"path":"'+JSON.parse(component.data).path+name+'/"}');
+					component.add(new_component);
+					
 				
-				
+				}	
 			}
 			component.update(component);
-			
 		},
 	});
 };
@@ -95,8 +151,8 @@ RemoteService.selectWidget = function(component, action){
 		component.renderView = widget.render;
 		component.renderLink = widget.renderLink;
 		component.update = widget.update;
-		component.data = '{"path":"/"}';
 		component.load = RemoteService.loadFile
+		component.data = "/";
 		
 		
 		
