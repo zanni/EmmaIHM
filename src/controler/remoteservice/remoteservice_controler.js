@@ -11,6 +11,7 @@ RemoteService.id = "remote_service";
 RemoteService.widget_path = "src/controler/remoteservice/widget/";
 
 Sink.widget.load(RemoteService.widget_path+"itunes/itunes");
+Sink.widget.load(RemoteService.widget_path+"vlc/vlc");
 
 
 RemoteService.helper = {};
@@ -116,12 +117,12 @@ RemoteService.loadFile = function(component){
 									method:"PUT",
 									data:'{"path":"'+prefix+'"}',
 									success:function(data){
-										alert(prefix);
+										//alert(prefix);
 										
 									},
 								});
-								//var card = Sink.widget.provider.get("card");
-								//card.render(this, "mouai c cool");
+								var vlc = Sink.widget.provider.get("remoteservice_vlc");
+								vlc.render(component);
 								
 							},
 						});
@@ -144,6 +145,7 @@ RemoteService.selectWidget = function(component, action){
 		widget = Sink.widget.provider.get("remoteservice_itunes");
 		component.renderCard = widget.render;
 		component.renderLink = widget.renderLink;
+		
 		component.leaf = true;
 	}
 	else if(component.name == "Media"){
@@ -152,16 +154,15 @@ RemoteService.selectWidget = function(component, action){
 		component.renderLink = widget.renderLink;
 		component.update = widget.update;
 		component.load = RemoteService.loadFile
+		component.ico = "resource/folder/gris.png";
 		component.data = "/";
-		
-		
-		
-		
-		
 	}
 	
-	else{
-		
+	else if(component.name == "vlc"){
+		widget = Sink.widget.provider.get("remoteservice_vlc");
+		component.renderCard = widget.render;
+		component.renderLink = widget.renderLink;
+		component.leaf = true;
 	}
 	
 
